@@ -4,7 +4,7 @@ Molecular models (LAMMPS DATA files), thermodynamical data and workflows for LAM
 ## Associated publication
 This repository is associated with the following publication: Steiakakis, K., Pichard, A., Vassaux, M. (2025). Molecular dynamics simulations reveal internal tension in native state collagen fibrils. [arXiv2511.14261](https://doi.org/10.48550/arXiv.2511.14261) 
 
-![Alt text](./graphical_abstract.tiff)
+![Alt text](./graphical_abstract.png)
 
 ## Content of the repository
 - **hydration** contains the workflows, the final structures and the thermodynamical data of the simulation of the equilibration of the microfibril at different hydration level.
