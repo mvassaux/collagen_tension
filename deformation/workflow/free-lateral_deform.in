@@ -1,0 +1,58 @@
+variable        sim_dir string ${data_dir}
+
+variable        outfreq index 1000
+variable        outputname index nvt-deform 
+
+units           real
+boundary        p p p
+
+timestep        1.5
+
+newton          off
+pair_style      lj/charmmfsw/coul/long 10 12
+pair_modify     mix arithmetic
+
+atom_style      full
+bond_style      harmonic
+angle_style     charmm
+dihedral_style  charmmfsw
+special_bonds   charmm
+improper_style  harmonic
+
+fix             cmap all cmap ./charmmff.cmap
+fix_modify      cmap energy yes
+read_data       ./nvtrelaxation.data   fix cmap crossterm CMAP
+
+kspace_style    pppm 1e-5
+
+neighbor        2 bin
+neigh_modify    delay 5 every 1
+
+fix             1 all shake 1e-6 500 0 m 1.008 a 95
+
+thermo          ${outfreq}
+thermo_style    custom step time xlo xhi ylo yhi zlo zhi etotal pe ke temp press ebond eangle edihed eimp evdwl ecoul elong temp vol
+dump            1 all atom ${outfreq} ${outputname}.lammpstrj
+
+variable        ppress equal "press"
+variable        vvol equal "vol"
+variable        llx equal "lx"
+variable        lly equal "ly"
+variable        llz equal "lz"
+variable        ppe equal "pe"
+variable        kke equal "ke"
+variable        ppx equal "pxx"
+variable        ppy equal "pyy"
+variable        ppz equal "pzz"
+fix             globalout all ave/time 10 100 ${outfreq} v_ppress v_vvol v_llx v_lly v_llz v_ppe v_kke v_ppx v_ppy v_ppz file  ${outputname}.thermodynamics.dat
+
+#velocity        all create 308.15 005000 dist gaussian
+restart         10000 collagen.restart.1 collagen.restart.2 
+
+fix             2 all npt temp 308.15 308.15 100.0 x 1.0 1.0 1000. y 1.0 1.0 1000.
+fix             3 all deform 1 z scale 1.05 remap v
+run             13333333
+unfix           3
+unfix           2 
+
+write_data      ${outputname}.data
