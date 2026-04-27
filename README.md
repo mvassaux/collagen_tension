@@ -2,7 +2,7 @@
 Molecular models (LAMMPS DATA files), thermodynamical data and workflows for LAMMPS simulations of hydration, relaxation and mechanical testing as well as post-treatment of thermodynamics of the systems.
 
 ## Associated publication
-This repository is associated with the following publication: Steiakakis, K., Pichard, A., Vassaux, M. (2025). Molecular dynamics simulations reveal internal tension in native state collagen fibrils. [arXiv2511.14261](https://doi.org/10.48550/arXiv.2511.14261) 
+This repository is associated with the following publication: Steiakakis, K., Pichard, A., Vassaux, M. (2026). Molecular dynamics simulations reveal internal tension in native state collagen fibrils. [10.1016/j.bpj.2026.04.012](https://doi.org/10.1016/j.bpj.2026.04.012)
 
 ![Alt text](./graphical_abstract.png)
 
